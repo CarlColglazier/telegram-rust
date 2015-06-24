@@ -1,0 +1,4 @@
+[package]
+name = "telegram"
+version = "0.0.0"
+authors = ["Carl Colglazier <carl@carlcolglazier.com>"]
