@@ -2,3 +2,7 @@
 name = "telegram"
 version = "0.0.0"
 authors = ["Carl Colglazier <carl@carlcolglazier.com>"]
+
+[dependencies]
+hyper = "0.5.2"
+rustc-serialize = "0.3.15"
