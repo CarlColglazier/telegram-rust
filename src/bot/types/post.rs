@@ -62,14 +62,14 @@ impl FormUrlEncode for GetUpdates {
 }
 
 pub enum Action {
-    TYPING,
-    UPLOAD_PHOTO,
-    RECORD_VIDEO,
-    UPLOAD_VIDEO,
-    RECORD_AUDIO,
-    UPLOAD_AUDIO,
-    UPLOAD_DOCUMENT,
-    FIND_LOCATION,
+    Typing,
+    UploadPhoto,
+    RecordVideo,
+    UploadVideo,
+    RecordAudio,
+    UploadAudio,
+    UploadDocument,
+    FindLocation,
 }
 
 pub struct ChatAction {
@@ -80,14 +80,14 @@ pub struct ChatAction {
 impl ChatAction {
     pub fn new(chat_id: usize, action: Action) -> ChatAction {
         let action_string = match action {
-            Action::TYPING => "typing",
-            Action::UPLOAD_PHOTO => "upload_photo",
-            Action::RECORD_VIDEO => "record_video",
-            Action::UPLOAD_VIDEO => "upload_video",
-            Action::RECORD_AUDIO => "record_audio",
-            Action::UPLOAD_AUDIO => "upload_audio",
-            Action::UPLOAD_DOCUMENT => "upload_document",
-            Action::FIND_LOCATION => "find_location",
+            Action::Typing => "typing",
+            Action::UploadPhoto => "upload_photo",
+            Action::RecordVideo => "record_video",
+            Action::UploadVideo => "upload_video",
+            Action::RecordAudio => "record_audio",
+            Action::UploadAudio => "upload_audio",
+            Action::UploadDocument => "upload_document",
+            Action::FindLocation => "find_location",
         };
         return ChatAction {
             chat_id: chat_id,
