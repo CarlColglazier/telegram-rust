@@ -1,7 +1,13 @@
+/*!
+Telegram provides methods for interfacing with the Telegram API.
+
+Currently, only the bot API is supported.
+
+*/
 extern crate hyper;
 extern crate rustc_serialize;
 
-mod bot;
+pub mod bot;
 mod common;
 
-pub use bot::*;
+use common::*;

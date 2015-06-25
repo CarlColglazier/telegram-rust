@@ -1,3 +1,9 @@
+mod chataction;
+mod getme;
+
+pub use self::chataction::{Action, ChatAction};
+pub use self::getme::GetMe;
+
 pub trait FormUrlEncode {
     fn to_urlencoded_str(&self) -> String;
 }
@@ -58,46 +64,5 @@ impl FormUrlEncode for GetUpdates {
         }
         let string = url_values.connect("&");
         return string;
-    }
-}
-
-pub enum Action {
-    Typing,
-    UploadPhoto,
-    RecordVideo,
-    UploadVideo,
-    RecordAudio,
-    UploadAudio,
-    UploadDocument,
-    FindLocation,
-}
-
-pub struct ChatAction {
-    chat_id: usize,
-    action: String,
-}
-
-impl ChatAction {
-    pub fn new(chat_id: usize, action: Action) -> ChatAction {
-        let action_string = match action {
-            Action::Typing => "typing",
-            Action::UploadPhoto => "upload_photo",
-            Action::RecordVideo => "record_video",
-            Action::UploadVideo => "upload_video",
-            Action::RecordAudio => "record_audio",
-            Action::UploadAudio => "upload_audio",
-            Action::UploadDocument => "upload_document",
-            Action::FindLocation => "find_location",
-        };
-        return ChatAction {
-            chat_id: chat_id,
-            action: action_string.to_string(),
-        };
-    }
-}
-
-impl FormUrlEncode for ChatAction {
-    fn to_urlencoded_str(&self) -> String {
-        return format!("chat_id={}&action={}", self.chat_id, self.action);
     }
 }

@@ -6,7 +6,7 @@ use std::io::Read;
 
 use rustc_serialize::json;
 use rustc_serialize::Decodable;
-use rustc_serialize::Encodable;
+// use rustc_serialize::Encodable;
 
 #[derive(RustcDecodable)]
 pub struct ApiResponse<T: Decodable> {
@@ -16,10 +16,30 @@ pub struct ApiResponse<T: Decodable> {
     pub description: Option<String>,
 }
 
+pub struct PostRequest {
+    url: String,
+}
+
+impl PostRequest {
+    pub fn from_string(url: String) -> PostRequest {
+        return PostRequest {
+            url: url,
+        }
+    }
+    pub fn new(url: &str) -> PostRequest {
+        return PostRequest::from_string(url.to_string());
+    }
+
+    pub fn send<T: Decodable>(&self) -> Option<ApiResponse<T>> {
+        return post_body::<T>(&self.url);
+    }
+}
+
 fn format_path(path: &str) -> String {
     format!("https://api.telegram.org/{}", path)
 }
 
+/*
 pub fn get(path: &str) -> Result<Response, Error> {
     let mut client = Client::new();
     let url = format_path(path);
@@ -40,6 +60,7 @@ pub fn get_body<T: Decodable>(path: &str) -> Option<ApiResponse<T>> {
         Err(_) => return None,
     }
 }
+*/
 
 pub fn post(path: &str) -> Result<Response, Error> {
     let mut client = Client::new();
