@@ -1,8 +1,5 @@
 
-use super::common::request::get_body;
-use super::common::request::post;
-// use self::types::post::FormUrlEncode;
-// use self::types::post::ChatAction;
+use super::common::request::*;
 
 pub mod types;
 
@@ -26,6 +23,16 @@ impl Bot {
         let path = format!("bot{}/getMe", self.token);
         return match get_body::<types::get::User>(&path) {
             Some(user) => user.result,
+            None => None,
+        }
+    }
+
+    pub fn send_message(&self, message: SendMessage) -> Option<Message> {
+        let path = format!("bot{}/sendMessage?{}",
+            self.token,
+            message.to_urlencoded_str());
+        return match post_body::<Message>(&path) {
+            Some(message) => message.result,
             None => None,
         }
     }

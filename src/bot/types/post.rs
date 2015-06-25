@@ -2,6 +2,29 @@ pub trait FormUrlEncode {
     fn to_urlencoded_str(&self) -> String;
 }
 
+pub struct SendMessage {
+    chat_id: usize,
+    text: String,
+    // TODO: disable_web_page_preview
+    // TODO: reply_to_message_id
+    // TODO: reply_markup
+}
+
+impl SendMessage {
+    pub fn new(chat_id: usize, text: &str) -> SendMessage {
+        return SendMessage {
+            chat_id: chat_id,
+            text: text.to_string(),
+        }
+    }
+}
+
+impl FormUrlEncode for SendMessage {
+    fn to_urlencoded_str(&self) -> String {
+        return format!("chat_id={}&text={}", self.chat_id, self.text);
+    }
+}
+
 pub struct GetUpdates {
     offset: Option<usize>,
     limit: Option<usize>,

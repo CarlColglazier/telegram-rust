@@ -47,9 +47,7 @@ pub fn post(path: &str) -> Result<Response, Error> {
     return client.post(&url).send();
 }
 
-pub fn post_body<T, U>(path: &str) -> Option<ApiResponse<U>>
-    where T: Encodable,
-          U: Decodable {
+pub fn post_body<T: Decodable>(path: &str) -> Option<ApiResponse<T>> {
     let mut response = match post(path) {
         Ok(res) => res,
         Err(_) => return None,
