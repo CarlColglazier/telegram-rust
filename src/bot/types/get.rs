@@ -1,4 +1,10 @@
 #[derive(RustcDecodable)]
+pub struct Update {
+    pub update_id: usize,
+    pub message: Option<Message>,
+}
+
+#[derive(RustcDecodable)]
 pub struct User {
     pub id: usize,
     pub first_name: String,
